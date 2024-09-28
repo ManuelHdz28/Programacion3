@@ -32,6 +32,7 @@ public class Principal extends javax.swing.JFrame {
         nmCatalogo = new javax.swing.JMenu();
         mnuAddVideoGame = new javax.swing.JMenuItem();
         nmVenta = new javax.swing.JMenu();
+        mnuRealizaVenta = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,6 +49,15 @@ public class Principal extends javax.swing.JFrame {
         nmenu.add(nmCatalogo);
 
         nmVenta.setText("Venta");
+
+        mnuRealizaVenta.setText("Realizar Venta");
+        mnuRealizaVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuRealizaVentaActionPerformed(evt);
+            }
+        });
+        nmVenta.add(mnuRealizaVenta);
+
         nmenu.add(nmVenta);
 
         setJMenuBar(nmenu);
@@ -71,6 +81,12 @@ public class Principal extends javax.swing.JFrame {
         frmVideoJuego objVJ = new frmVideoJuego();
         objVJ.setVisible(true);
     }//GEN-LAST:event_mnuAddVideoGameActionPerformed
+
+    private void mnuRealizaVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRealizaVentaActionPerformed
+        // TODO add your handling code here:
+        frmVenta objVenta = new frmVenta();
+        objVenta.setVisible(true);
+    }//GEN-LAST:event_mnuRealizaVentaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -109,6 +125,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem mnuAddVideoGame;
+    private javax.swing.JMenuItem mnuRealizaVenta;
     private javax.swing.JMenu nmCatalogo;
     private javax.swing.JMenu nmVenta;
     private javax.swing.JMenuBar nmenu;

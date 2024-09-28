@@ -7,7 +7,9 @@ package formulario;
 
 import Clases.VideoJuego;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,6 +24,29 @@ public class frmVenta extends javax.swing.JFrame {
      */
     public frmVenta() {
         initComponents();
+        
+        //
+        
+        // Se agregara un valor inicial a la lista de videojuegos
+        VideoJuego vj = new VideoJuego();
+        vj.setNombre("Minecraft");
+        vj.setId(1);
+        vj.setPrecio(40.0);
+        
+        ListVideoJuego = new ArrayList<>();
+        
+        agregarElementos(vj);
+        
+        
+    }
+    
+    public void agregarElementos(VideoJuego vj){
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        ListVideoJuego.add(vj);
+        for(VideoJuego vjj : ListVideoJuego){
+            model.addElement(vjj);
+        }
+        cbxProducto.setModel(model);
     }
 
     /**
@@ -41,15 +66,14 @@ public class frmVenta extends javax.swing.JFrame {
         cbxProducto = new javax.swing.JComboBox<>();
         AgregarNuevoVideoJuego = new javax.swing.JButton();
         btnPagar = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Venta de VideoJuegos");
 
         tblVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Producto", "Cantidad", "Precio Unitario", "SubTotak"
@@ -71,7 +95,7 @@ public class frmVenta extends javax.swing.JFrame {
 
         cbxProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        AgregarNuevoVideoJuego.setText("Agregar");
+        AgregarNuevoVideoJuego.setText("Nuevo Porducto");
         AgregarNuevoVideoJuego.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AgregarNuevoVideoJuegoActionPerformed(evt);
@@ -85,46 +109,58 @@ public class frmVenta extends javax.swing.JFrame {
             }
         });
 
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbxProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(cbxProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(AgregarNuevoVideoJuego, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(AgregarNuevoVideoJuego, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPagar))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(cbxProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AgregarNuevoVideoJuego))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAgregar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPagar))
                 .addGap(16, 16, 16))
         );
 
@@ -133,7 +169,7 @@ public class frmVenta extends javax.swing.JFrame {
 
     private void AgregarNuevoVideoJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarNuevoVideoJuegoActionPerformed
         // TODO add your handling code here:
-        frmVideoJuego objNVJ = new frmVideoJuego();
+        frmVideoJuego objNVJ = new frmVideoJuego(this);
         this.setEnabled(false);
         objNVJ.setVisible(true);
     }//GEN-LAST:event_AgregarNuevoVideoJuegoActionPerformed
@@ -145,8 +181,24 @@ public class frmVenta extends javax.swing.JFrame {
             total += Double.parseDouble(tblVenta.getValueAt(i, 4).toString());
         }
         
-        JOptionPane.showConfirmDialog(this, total + " Total a Pagar" + NORMAL);
+        JOptionPane.showConfirmDialog(this, "El Precio Final a Cancelar es: " + total + NORMAL);
     }//GEN-LAST:event_btnPagarActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // TODO add your handling code here:
+        Object item = cbxProducto.getSelectedItem();
+        
+        DefaultTableModel model = (DefaultTableModel) tblVenta.getModel();
+        model.addRow( new Object[]{
+            ((VideoJuego)  item).getId(),
+            ((VideoJuego)  item).getNombre(),
+            Double.parseDouble(txtCantidad.getText()),
+            ((VideoJuego)  item).getPrecio(),
+            Double.parseDouble(txtCantidad.getText()) * ((VideoJuego)  item).getPrecio(),
+        }
+        );
+        
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,6 +237,7 @@ public class frmVenta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AgregarNuevoVideoJuego;
+    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnPagar;
     private javax.swing.JComboBox<String> cbxProducto;
     private javax.swing.JLabel jLabel1;

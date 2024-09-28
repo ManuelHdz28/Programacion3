@@ -18,6 +18,14 @@ public class frmVideoJuego extends javax.swing.JFrame {
 
     // Objeto de Referencia Global
     VideoJuego vj;
+    frmVenta ventaRef;
+    
+    
+    public VideoJuego getVideoJuego(){
+        return  vj;
+    }
+    
+    
 
     /**
      * Creates new form frmVideoJuego
@@ -37,6 +45,25 @@ public class frmVideoJuego extends javax.swing.JFrame {
         prv.setNombre("Microsoft");
         cbxProveedor.removeAllItems();
         cbxProveedor.addItem(prv.getNombre());
+    }
+    
+    public frmVideoJuego(frmVenta referencia) {
+        initComponents();
+
+        // Colocar un titulo a nuestro Frame
+        this.setTitle("Datos de VideoJuegos");
+
+        TipoVideoJuego tvj = new TipoVideoJuego();
+        tvj.setNombre("Accion");
+        cdxTipoVideoJuego.removeAllItems();
+        cdxTipoVideoJuego.addItem(tvj.getNombre());
+
+        Proveedor prv = new Proveedor();
+        prv.setNombre("Microsoft");
+        cbxProveedor.removeAllItems();
+        cbxProveedor.addItem(prv.getNombre());
+        
+        ventaRef = referencia;
     }
 
     /**
@@ -219,11 +246,18 @@ public class frmVideoJuego extends javax.swing.JFrame {
 
             // Limpiando Controles
             limpiarFormulario();
+            
+            if(ventaRef != null){
+                ventaRef.agregarElementos(vj);
+                ventaRef.setEnabled(true);
+                this.dispose();
+            }
+            
 
             JOptionPane.showMessageDialog(this, "VideoJuego Agregado Exitosamente", "Confirmacion", NORMAL);
 
         } catch (Exception ex) {
-            System.out.println("Se han Presentado algunos errores");
+            System.out.println(ex.getMessage());
         }
 
 
